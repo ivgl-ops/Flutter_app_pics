@@ -1,17 +1,39 @@
-# test_pics
+# Тестовое задание для EvoSoft
 
-A new Flutter project.
-![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white)
+![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white) ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 
-## Getting Started
+# Используемые библиотеки 
+  - provider 6.0.5 
+  - shared_preferences 2.0.17
+  - utter_dropdown_alert: ^1.0.7
+  - utter_spinkit: ^5.1.0
+  - ogle_fonts: ^3.0.1
 
-This project is a starting point for a Flutter application.
+# Задание 
 
-A few resources to get you started if this is your first Flutter project:
+## Первый экран - авторизация.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+  - На экране должно быть поле ввода для номера телефона и кнопка "Запросить смс".
+  - После нажатия кнопки, при корректно вводе номере, появляется поле для вводакода из смс (номер: +79998887766 код для входа: 1111).
+  - В течении 60 сек. после запроса кода идет таймер, после которого смс можно запросить повторно.
+  - Если пользователь ввел корректный код, то приложение переходит на экран сосписком.
+  - Предусмотреть ошибки - некорректный номер телефона, некорректный код изсмс.
+  - При повторном открытии приложения, если пользователь уже был авторизирован, сразу открывать экран со списком.
+  - При запросе смс и вводе кода сделать задержку 2 сек. для имитации сетевого запроса.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Второй экран - список изображений
+
+  - Отображается список изображений, загруженных из сети (любые, просто по url)
+  - За раз в списке отображается 10 картинок.
+  - При прокрутке списка вниз, подгружаются новые картинки. (1-2 раза достаточно)
+  - Для имитации сетевого запроса при подгрузке сделать задержку 2 сек. Перед добавлением новых картинок в список.
+  - При нажатии на картинку, открывается экран для просмотра изображения
+  - В тулбаре должна быть кнопка для выхода из аккаунта на экран авторизации.
+
+## Третий экран - просмотр изображения
+
+  - По центру экрана открытое изображение
+  - В тулбаре кнопка для удаления изображения.
+  - После удаления изображение так-же должно пропасть из списка
+  - После удаления изображения не должно быть в списке при повторном открытииприложения.
+  - При удалении изображения сделать задержку 2 сек. для имитации сетевого запроса.
