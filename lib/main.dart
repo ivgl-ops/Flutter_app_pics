@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dropdown_alert/dropdown_alert.dart';
 import 'package:provider/provider.dart';
 import 'package:test_pics/data/user_data.dart';
+import 'package:test_pics/view/auth_code_view.dart';
 import 'package:test_pics/view/auth_view.dart';
 import 'package:test_pics/view/contant_view.dart';
 import 'package:test_pics/view/detail_pics.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) => Stack(
           children: [child!, const DropdownAlert()],
         ),
-        home: login ? const ContantView() : const AuthView(),
+        home: login ? const AuthCodeView() : const AuthView(),
         routes: {
           // When navigating to the "/" route, build the FirstScreen widget.
           '/detail_pics': (context) => const DetailPics(),

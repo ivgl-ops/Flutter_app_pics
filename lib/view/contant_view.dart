@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_pics/widgets/loading_indicator.dart';
 import 'package:test_pics/widget_model/pics_model.dart';
 import 'package:test_pics/data/user_data.dart';
 
@@ -109,7 +110,7 @@ class _ContantViewState extends State<ContantView> {
                               ),
                               onTap: () {
                                 Navigator.pushNamed(context, '/detail_pics',
-                                    arguments: ScreenArguments(
+                                    arguments: PicsArguments(
                                         items[index], index, pics));
                               },
                             ),
@@ -130,10 +131,13 @@ class _ContantViewState extends State<ContantView> {
                     Positioned(
                       left: 0,
                       bottom: 0,
-                      child: SizedBox(
+                      child: Container(
+                        padding: const EdgeInsets.only(top: 30, bottom: 15),
                         width: constraints.maxWidth,
                         height: 80,
-                        child: const Center(child: CircularProgressIndicator()),
+                        child: const Center(
+                          child: LoadingIndicator(size: 60.0,)
+                        ),
                       ),
                     )
                   ]
@@ -143,7 +147,7 @@ class _ContantViewState extends State<ContantView> {
               return Center(
                 child: context.watch<PicsModel>().pics.isEmpty
                     ? const Text("Данные отсутвуют")
-                    : const CircularProgressIndicator(),
+                    : const LoadingIndicator(size: 120.0,)
               );
             }
           },
@@ -151,9 +155,9 @@ class _ContantViewState extends State<ContantView> {
   }
 }
 
-class ScreenArguments {
+class PicsArguments {
   final String urlPic;
   final int index;
   final List<String> listPics;
-  ScreenArguments(this.urlPic, this.index, this.listPics);
+  PicsArguments(this.urlPic, this.index, this.listPics);
 }

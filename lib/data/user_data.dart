@@ -2,9 +2,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserData {
   static late SharedPreferences _preferences;
-  static const _keyLogin = 'login';
-  static const _keyUserNumber = 'number';
-  static const _keyPics = 'pic_get';
+  static const _keyLogin = 'login11';
+  static const _keyUserNumber = 'number11';
+  static const _keyPics = 'pic_get111';
 
 
   static Future init() async =>

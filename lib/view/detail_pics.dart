@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_pics/widgets/loading_indicator.dart';
 
 import '../widget_model/pics_model.dart';
 import 'contant_view.dart';
@@ -15,7 +16,7 @@ class _DetailPicsState extends State<DetailPics> {
   bool loading = true;
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+    final args = ModalRoute.of(context)!.settings.arguments as PicsArguments;
     return Scaffold(
         appBar: AppBar(
           actions: [
@@ -42,7 +43,7 @@ class _DetailPicsState extends State<DetailPics> {
                 image: NetworkImage(args.urlPic),
               ))
             : const Center(
-                child: CircularProgressIndicator(),
+                child: LoadingIndicator(size: 120),
               ));
   }
 }
