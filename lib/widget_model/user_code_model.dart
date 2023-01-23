@@ -13,5 +13,4 @@ class UserCode extends ChangeNotifier {
     code = min + random.nextInt(max - min);
     notifyListeners();
   }
-  
 }

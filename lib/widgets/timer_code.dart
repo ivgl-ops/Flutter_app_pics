@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:provider/provider.dart';
+import 'package:test_pics/widgets/custom_text.dart';
 
 import '../widget_model/user_code_model.dart';
 
@@ -15,9 +16,26 @@ class TimerCode extends StatefulWidget {
 }
 
 class _TimerCodeState extends State<TimerCode> {
-  late Timer timer;
-  int start = 3;
   late bool check;
+  int start = 60;
+  late Timer timer;
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    check = true;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      startTimer();
+      success();
+    });
+
+    super.initState();
+  }
 
   void success() {
     Map<String, dynamic> payload = <String, dynamic>{};
@@ -26,7 +44,7 @@ class _TimerCodeState extends State<TimerCode> {
     check = true;
     AlertController.show(
         "Уведомление",
-        "Ваш код ${Provider.of<UserCode>(context, listen: false).code}",
+        "Ваш код: ${Provider.of<UserCode>(context, listen: false).code}",
         TypeAlert.success,
         payload);
   }
@@ -51,31 +69,15 @@ class _TimerCodeState extends State<TimerCode> {
   }
 
   @override
-  void initState() {
-    check = true;
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      startTimer();
-      success();
-    });
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return check
-        ? Text("Вы можете запросить новый код через: ${start.toString()}")
+        ? CustomText(
+            text: "Вы можете запросить новый код через: ${start.toString()}")
         : GestureDetector(
-            child: const Text("Отправить код повторно"),
+            child: const CustomText(text: "Отправить код повторно"),
             onTap: () {
               check = true;
-              start = 3;
+              start = 60;
               startTimer();
               Timer(const Duration(seconds: 2), () {
                 success();

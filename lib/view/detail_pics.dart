@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_pics/widgets/custom_text.dart';
 import 'package:test_pics/widgets/loading_indicator.dart';
 
 import '../widget_model/pics_model.dart';
@@ -14,11 +15,15 @@ class DetailPics extends StatefulWidget {
 
 class _DetailPicsState extends State<DetailPics> {
   bool loading = true;
+
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as PicsArguments;
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
+          centerTitle: true,
+          title: const CustomText(text: "Pics", fontWeight: FontWeight.bold,),
           actions: [
             IconButton(
                 onPressed: () async {
@@ -38,8 +43,10 @@ class _DetailPicsState extends State<DetailPics> {
         body: loading
             ? Center(
                 child: Image(
-                width: 300,
-                height: 300,
+                  filterQuality:FilterQuality.high ,
+                  fit: BoxFit.contain,
+                width: 250,
+                height: 250,
                 image: NetworkImage(args.urlPic),
               ))
             : const Center(

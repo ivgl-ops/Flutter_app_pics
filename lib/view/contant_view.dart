@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_pics/widgets/custom_text.dart';
 import 'package:test_pics/widgets/loading_indicator.dart';
 import 'package:test_pics/widget_model/pics_model.dart';
 import 'package:test_pics/data/user_data.dart';
@@ -13,10 +14,33 @@ class ContantView extends StatefulWidget {
 }
 
 class _ContantViewState extends State<ContantView> {
-  bool loading = false, allLoaded = false;
-  final ScrollController scrollController = ScrollController();
   late List<String> items;
+  bool loading = false, allLoaded = false;
   late List<String> pics;
+  final ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    mockFetch(context);
+    scrollController.addListener(() {
+      if (scrollController.position.pixels >=
+              scrollController.position.maxScrollExtent &&
+          !loading) {
+        if (kDebugMode) {
+          print("New data call");
+        }
+        mockFetch(context);
+      }
+    });
+
+    @override
+    // ignore: unused_element
+    void dispose() {
+      super.dispose();
+      scrollController.dispose();
+    }
+  }
 
   mockFetch(BuildContext context) async {
     items = Provider.of<PicsModel>(context, listen: false).items;
@@ -54,34 +78,15 @@ class _ContantViewState extends State<ContantView> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    mockFetch(context);
-    scrollController.addListener(() {
-      if (scrollController.position.pixels >=
-              scrollController.position.maxScrollExtent &&
-          !loading) {
-        if (kDebugMode) {
-          print("New data call");
-        }
-        mockFetch(context);
-      }
-    });
-
-    @override
-    // ignore: unused_element
-    void dispose() {
-      super.dispose();
-      scrollController.dispose();
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     String userNumber = UserData.getUserNumber() ?? 'None';
     return Scaffold(
         appBar: AppBar(
-          title: Text(userNumber),
+          backgroundColor: Colors.black,
+          title: CustomText(
+            text: userNumber,
+            fontWeight: FontWeight.bold,
+          ),
           centerTitle: true,
           automaticallyImplyLeading: false,
           actions: [
@@ -104,8 +109,8 @@ class _ContantViewState extends State<ContantView> {
                           return Center(
                             child: GestureDetector(
                               child: Image(
-                                height: 200,
-                                width: 200,
+                                height: 150,
+                                width: 160,
                                 image: NetworkImage(items[index]),
                               ),
                               onTap: () {
@@ -118,7 +123,8 @@ class _ContantViewState extends State<ContantView> {
                         } else {
                           return const SizedBox(
                             height: 50,
-                            child: Center(child: Text("На этом пока все :)")),
+                            child: Center(
+                                child: CustomText(text: "Данных больше нет")),
                           );
                         }
                       },
@@ -136,8 +142,9 @@ class _ContantViewState extends State<ContantView> {
                         width: constraints.maxWidth,
                         height: 80,
                         child: const Center(
-                          child: LoadingIndicator(size: 60.0,)
-                        ),
+                            child: LoadingIndicator(
+                          size: 60.0,
+                        )),
                       ),
                     )
                   ]
@@ -145,10 +152,11 @@ class _ContantViewState extends State<ContantView> {
               );
             } else {
               return Center(
-                child: context.watch<PicsModel>().pics.isEmpty
-                    ? const Text("Данные отсутвуют")
-                    : const LoadingIndicator(size: 120.0,)
-              );
+                  child: context.watch<PicsModel>().pics.isEmpty
+                      ? const CustomText(text: "Данные отсутвуют")
+                      : const LoadingIndicator(
+                          size: 120.0,
+                        ));
             }
           },
         ));
@@ -156,8 +164,9 @@ class _ContantViewState extends State<ContantView> {
 }
 
 class PicsArguments {
-  final String urlPic;
+  PicsArguments(this.urlPic, this.index, this.listPics);
+
   final int index;
   final List<String> listPics;
-  PicsArguments(this.urlPic, this.index, this.listPics);
+  final String urlPic;
 }

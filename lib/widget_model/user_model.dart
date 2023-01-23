@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class UserModel extends ChangeNotifier {
-  String phone = 'None';
   bool checkUserPhone = false;
+  String phone = 'None';
+
   void getNumber(String userPhone) {
     phone = userPhone;
     notifyListeners();

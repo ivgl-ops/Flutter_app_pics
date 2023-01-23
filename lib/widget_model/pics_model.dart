@@ -5,9 +5,9 @@ import '../data/user_data.dart';
 
 class PicsModel extends ChangeNotifier {
   List<String> items = [];
-  String userNumber = UserData.getUserNumber() ?? 'None';
   List<String> newPics = UserData.getPics() ?? Constants().listPics;
   List<String> pics = UserData.getPics() ?? Constants().listPics;
+  String userNumber = UserData.getUserNumber() ?? 'None';
 
   void removePic(int index) {
     items.removeAt(index);
