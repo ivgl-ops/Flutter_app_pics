@@ -9,7 +9,7 @@ import 'package:test_pics/view/contant_view.dart';
 import 'package:test_pics/view/detail_pics.dart';
 import 'package:test_pics/widget_model/user_code_model.dart';
 import 'package:test_pics/widget_model/user_model.dart';
-
+ 
 import 'widget_model/pics_model.dart';
 
 Future main() async {
@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
         ),
         home: login ? const ContantView() : const AuthView(),
         routes: {
+          // When navigating to the "/" route, build the FirstScreen widget.
           '/detail_pics': (context) => const DetailPics(),
           '/login': ((context) => const AuthView()),
           '/get_code': ((context) => const AuthCodeView()),
