@@ -3,11 +3,11 @@
 ![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white) ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 
 # Используемые библиотеки 
-  - provider 6.0.5 
-  - shared_preferences 2.0.17
-  - utter_dropdown_alert: ^1.0.7
-  - utter_spinkit: ^5.1.0
-  - ogle_fonts: ^3.0.1
+  - provider: ^6.0.5
+  - flutter_dropdown_alert: ^1.0.7
+  - shared_preferences: ^2.0.17
+  - flutter_spinkit: ^5.1.0
+  - google_fonts: ^3.0.1
 
 # Задание 
 
