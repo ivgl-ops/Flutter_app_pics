@@ -1,9 +1,10 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+//Сохранение данных
 class UserData {
-  static const _keyLogin = 'login111';
-  static const _keyPics = 'pic_get11111';
-  static const _keyUserNumber = 'number111';
+  static const _keyLogin = 'log_in';
+  static const _keyPics = 'get_pic';
+  static const _keyUserNumber = 'number_user';
   static late SharedPreferences _preferences;
 
   static Future init() async =>

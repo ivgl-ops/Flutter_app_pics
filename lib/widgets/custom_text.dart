@@ -8,19 +8,25 @@ class CustomText extends StatelessWidget {
       this.size,
       this.fontWeight,
       this.align,
-      this.color});
+      this.color,
+      this.underline});
 
   final FontWeight? fontWeight;
   final double? size;
   final String text;
   final TextAlign? align;
   final Color? color;
+  final TextDecoration? underline;
 
   @override
   Widget build(BuildContext context) {
     return Text(text,
         textAlign: align,
         style: GoogleFonts.montserrat(
-            fontSize: size, fontWeight: fontWeight, color: color));
+          fontSize: size,
+          fontWeight: fontWeight,
+          color: color,
+          decoration: underline,
+        ));
   }
 }

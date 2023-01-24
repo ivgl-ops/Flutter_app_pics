@@ -6,6 +6,8 @@ import 'package:test_pics/widgets/loading_indicator.dart';
 import 'package:test_pics/widget_model/pics_model.dart';
 import 'package:test_pics/data/user_data.dart';
 
+
+//Страница с контентом
 class ContantView extends StatefulWidget {
   const ContantView({Key? key}) : super(key: key);
 
@@ -80,86 +82,91 @@ class _ContantViewState extends State<ContantView> {
   @override
   Widget build(BuildContext context) {
     String userNumber = UserData.getUserNumber() ?? 'None';
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: CustomText(
-            text: userNumber,
-            fontWeight: FontWeight.bold,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.black,
+            title: CustomText(
+              text: userNumber,
+              fontWeight: FontWeight.bold,
+            ),
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            actions: [
+              IconButton(
+                  onPressed: () async {
+                    Navigator.pushNamed(context, '/login');
+                    await UserData.setLogin(false);
+                  },
+                  icon: const Icon(Icons.logout))
+            ],
           ),
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-                onPressed: () async {
-                  Navigator.pushNamed(context, '/login');
-                  await UserData.setLogin(false);
-                },
-                icon: const Icon(Icons.logout))
-          ],
-        ),
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            if (items.isNotEmpty) {
-              return Stack(
-                children: [
-                  ListView.separated(
-                      itemBuilder: (context, index) {
-                        if (index < items.length) {
-                          return Center(
-                            child: GestureDetector(
-                              child: Image(
-                                height: 150,
-                                width: 160,
-                                image: NetworkImage(items[index]),
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              if (items.isNotEmpty) {
+                return Stack(
+                  children: [
+                    ListView.separated(
+                        itemBuilder: (context, index) {
+                          if (index < items.length) {
+                            return Center(
+                              child: GestureDetector(
+                                child: Image(
+                                  height: 150,
+                                  width: 160,
+                                  image: NetworkImage(items[index]),
+                                ),
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/detail_pics',
+                                      arguments: PicsArguments(
+                                          items[index], index, pics));
+                                },
                               ),
-                              onTap: () {
-                                Navigator.pushNamed(context, '/detail_pics',
-                                    arguments: PicsArguments(
-                                        items[index], index, pics));
-                              },
-                            ),
-                          );
-                        } else {
-                          return const SizedBox(
-                            height: 50,
-                            child: Center(
-                                child: CustomText(text: "Данных больше нет")),
-                          );
-                        }
-                      },
-                      controller: scrollController,
-                      separatorBuilder: (context, index) {
-                        return const Divider();
-                      },
-                      itemCount: items.length + (allLoaded ? 1 : 0)),
-                  if (loading) ...[
-                    Positioned(
-                      left: 0,
-                      bottom: 0,
-                      child: Container(
-                        padding: const EdgeInsets.only(top: 30, bottom: 15),
-                        width: constraints.maxWidth,
-                        height: 80,
-                        child: const Center(
-                            child: LoadingIndicator(
-                          size: 60.0,
-                        )),
-                      ),
-                    )
-                  ]
-                ],
-              );
-            } else {
-              return Center(
-                  child: context.watch<PicsModel>().pics.isEmpty
-                      ? const CustomText(text: "Данные отсутвуют")
-                      : const LoadingIndicator(
-                          size: 120.0,
-                        ));
-            }
-          },
-        ));
+                            );
+                          } else {
+                            return const SizedBox(
+                              height: 50,
+                              child: Center(
+                                  child: CustomText(text: "Данных больше нет")),
+                            );
+                          }
+                        },
+                        controller: scrollController,
+                        separatorBuilder: (context, index) {
+                          return const Divider();
+                        },
+                        itemCount: items.length + (allLoaded ? 1 : 0)),
+                    if (loading) ...[
+                      Positioned(
+                        left: 0,
+                        bottom: 0,
+                        child: Container(
+                          padding: const EdgeInsets.only(top: 30, bottom: 15),
+                          width: constraints.maxWidth,
+                          height: 80,
+                          child: const Center(
+                              child: LoadingIndicator(
+                            size: 60.0,
+                          )),
+                        ),
+                      )
+                    ]
+                  ],
+                );
+              } else {
+                return Center(
+                    child: context.watch<PicsModel>().pics.isEmpty
+                        ? const CustomText(text: "Данные отсутвуют")
+                        : const LoadingIndicator(
+                            size: 120.0,
+                          ));
+              }
+            },
+          )),
+    );
   }
 }
 

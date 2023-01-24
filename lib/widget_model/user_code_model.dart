@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 
-class UserCode extends ChangeNotifier {
+class UserCodeModel extends ChangeNotifier {
   int code = 0;
 
   void getCode() {

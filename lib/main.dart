@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dropdown_alert/dropdown_alert.dart';
 import 'package:provider/provider.dart';
 import 'package:test_pics/data/user_data.dart';
+import 'package:test_pics/view/auth_code_view.dart';
 import 'package:test_pics/view/auth_view.dart';
 import 'package:test_pics/view/contant_view.dart';
 import 'package:test_pics/view/detail_pics.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => UserModel()),
-        ChangeNotifierProvider(create: (context) => UserCode()),
+        ChangeNotifierProvider(create: (context) => UserCodeModel()),
         ChangeNotifierProvider(create: (context) => PicsModel()),
       ],
       child: MaterialApp(
@@ -46,9 +47,9 @@ class MyApp extends StatelessWidget {
         ),
         home: login ? const ContantView() : const AuthView(),
         routes: {
-          // When navigating to the "/" route, build the FirstScreen widget.
           '/detail_pics': (context) => const DetailPics(),
           '/login': ((context) => const AuthView()),
+          '/get_code': ((context) => const AuthCodeView()),
           '/contant': ((context) => const ContantView())
         },
       ),

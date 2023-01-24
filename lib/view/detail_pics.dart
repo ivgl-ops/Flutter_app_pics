@@ -6,6 +6,7 @@ import 'package:test_pics/widgets/loading_indicator.dart';
 import '../widget_model/pics_model.dart';
 import 'contant_view.dart';
 
+//страница с картинкой
 class DetailPics extends StatefulWidget {
   const DetailPics({super.key});
 

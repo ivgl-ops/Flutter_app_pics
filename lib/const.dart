@@ -1,5 +1,5 @@
 class Constants {
-  // ignore: non_constant_identifier_names
+  // лист с начальными данными
   List<String> listPics = [
     'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Flag_of_the_Bahamas.svg/520px-Flag_of_the_Bahamas.svg.png',
     'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Flag_of_Belgium.svg/520px-Flag_of_Belgium.svg.png',

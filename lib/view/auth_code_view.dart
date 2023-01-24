@@ -15,6 +15,7 @@ import '../data/user_data.dart';
 import '../widget_model/user_code_model.dart';
 import '../widgets/timer_code.dart';
 
+//Страница получения 4-х значного кода
 class AuthCodeView extends StatefulWidget {
   const AuthCodeView({super.key});
 
@@ -60,7 +61,7 @@ class _AuthCodeViewState extends State<AuthCodeView> {
           fontWeight: FontWeight.bold,
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -78,6 +79,7 @@ class _AuthCodeViewState extends State<AuthCodeView> {
                   align: TextAlign.center,
                   text: 'Введите полученный 4-значный цифровой код',
                   size: 18,
+                  
                 ),
               ),
               Container(
@@ -91,7 +93,7 @@ class _AuthCodeViewState extends State<AuthCodeView> {
                         value.length < 4 ||
                         value.length > 4 ||
                         value !=
-                            Provider.of<UserCode>(context, listen: false)
+                            Provider.of<UserCodeModel>(context, listen: false)
                                 .code
                                 .toString()) {
                       return 'Неправильно \n  набран код';

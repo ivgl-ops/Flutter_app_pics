@@ -36,15 +36,15 @@ class _TimerCodeState extends State<TimerCode> {
 
     super.initState();
   }
-
+  //созадние уведомления
   void success() {
     Map<String, dynamic> payload = <String, dynamic>{};
     payload["data"] = "content";
-    Provider.of<UserCode>(context, listen: false).getCode();
+    Provider.of<UserCodeModel>(context, listen: false).getCode();
     check = true;
     AlertController.show(
         "Уведомление",
-        "Ваш код: ${Provider.of<UserCode>(context, listen: false).code}",
+        "Ваш код: ${Provider.of<UserCodeModel>(context, listen: false).code}",
         TypeAlert.success,
         payload);
   }
@@ -74,7 +74,7 @@ class _TimerCodeState extends State<TimerCode> {
         ? CustomText(
             text: "Вы можете запросить новый код через: ${start.toString()}")
         : GestureDetector(
-            child: const CustomText(text: "Отправить код повторно"),
+            child: const CustomText(text: "Отправить код повторно", underline: TextDecoration.underline,),
             onTap: () {
               check = true;
               start = 60;

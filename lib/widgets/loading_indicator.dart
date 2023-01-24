@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+//Кастомный индикатор
 class LoadingIndicator extends StatefulWidget {
   const LoadingIndicator({super.key, required this.size});
 
