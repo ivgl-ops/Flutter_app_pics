@@ -43,7 +43,7 @@
 Шаг 1: Склонируйте проект на свой компьютер 
 
 ```sh
-git clone https://github.com/ivgl-ops/special-spoon.git
+git clone https://github.com/ivgl-ops/Flutter_app_pics.git
 
 ```
 
