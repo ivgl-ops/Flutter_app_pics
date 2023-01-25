@@ -51,7 +51,7 @@ git clone https://github.com/ivgl-ops/Flutter_app_pics.git
 Шаг 2: Перейдите в проект и добавьте зависимости 
 
 ```sh
-cd test_pic
+cd flutter_app_pics
 flutter pub get
 
 ```
